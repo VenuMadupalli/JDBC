@@ -173,3 +173,61 @@ public  class Main {
 
 ---
 
+
+# Day-02: JDBC – Insert, Delete, Update
+
+### 🔹 1. JDBC (Java Database Connectivity)
+
+* JDBC is an **API in Java** used to connect and execute queries with databases.
+* Common steps in every program:
+
+  1. **Load Driver** → `Class.forName("com.mysql.cj.jdbc.Driver");`
+  2. **Establish Connection** → `DriverManager.getConnection(url, username, password)`
+  3. **Create Statement** → `Statement stmt = con.createStatement();`
+  4. **Execute Query** → `stmt.executeUpdate(query);`
+  5. **Close Connection** → `stmt.close(); con.close();`
+
+---
+
+### 🔹 2. INSERT (Adding records)
+
+```java
+String query = "INSERT INTO employee(id, name, job_title, salary) " +
+               "VALUES (5, 'upi','Developer', 100000.0), (6,'Ram','testing', 150000.0);";
+int rowsaffected = stmt.executeUpdate(query);
+```
+
+✅ If rows are inserted → shows number of rows affected.
+
+---
+
+### 🔹 3. DELETE (Removing records)
+
+```java
+String query = "DELETE FROM employee WHERE id=6;";
+int rowsaffected = stmt.executeUpdate(query);
+```
+
+✅ Deletes the row(s) with condition.
+
+---
+
+### 🔹 4. UPDATE (Modifying records)
+
+```java
+String query = "UPDATE employee SET job_title='Developer' WHERE id=4;";
+int rowsaffected = stmt.executeUpdate(query);
+```
+
+✅ Updates existing data in table.
+
+---
+
+### 🔹 5. Points to Remember
+
+* `executeUpdate(query)` → used for **INSERT, UPDATE, DELETE** → returns **number of rows affected**.
+* `executeQuery(query)` → SELECT → returns ResultSet (table of results).
+* Always **close statement and connection** after use.
+* Exception handling is important (`ClassNotFoundException`, `SQLException`).
+* Use **PreparedStatement** (instead of Statement) in real projects to avoid **SQL Injection**.
+---
